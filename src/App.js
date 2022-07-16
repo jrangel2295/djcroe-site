@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Header from "./Header/Header";
+import {ScaleLoader,BounceLoader} from "react-spinners";
+import ClipLoader from "react-spinners/ClipLoader";
+import "./App.css";
 
 function App() {
+  const [loading, setloading] = useState(false);
+
+  useEffect(() => {
+    setloading(true);
+    setTimeout(() => {
+      setloading(false);
+    }, 5500);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" >
+      {loading ? 
+        <ScaleLoader className="loading-icon"
+          color={'#DC143C'}
+          loading={loading}
+        />
+       : 
+        <div>
+          <Header />
+        </div>
+      }
     </div>
   );
 }
